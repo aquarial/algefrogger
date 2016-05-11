@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 
 public class Main {
     public static void main(String[] args) {
-        int width = 400;
-        int height = 600;
+        int width = 520;
+        int height = 480; //13x12, 40x40 blocks
 
         JFrame frame = new JFrame();
         frame.setVisible(true);
