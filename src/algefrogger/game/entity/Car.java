@@ -1,26 +1,26 @@
-package algefrogger.entity;
+package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
-public class Log implements IEntity {
+public class Car implements IEntity {
 
 	int x;
 	int y;
 	int width;
 	int height;
-	int logLength;
+	int value;
 	
-	String logText;
+	BufferedImage carIcon;
 	
-	BufferedImage logIcon;
-	
-	public Log(int width, int height, int logLength, BufferedImage logIcon){
+	public Car(int width, int height, int value, BufferedImage carIcon){
 		this.width = width;
 		this.height = height;
-		this.logLength = logLength;
-		this.logIcon = logIcon;
-		
-		logText = "ln(" + ((int)Math.pow(Math.E, logLength)) + ")";
+		this.value = value;
+		this.carIcon = carIcon;
+	}
+	
+	public int getValue(){
+		return value;
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class Log implements IEntity {
 
 	@Override
 	public BufferedImage getEntityIcon() {
-		return logIcon;
+		return carIcon;
 	}
 
 	@Override

@@ -1,26 +1,22 @@
-package algefrogger.entity;
+package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
-public class Car implements IEntity {
+public class Turtle implements IEntity {
 
 	int x;
 	int y;
 	int width;
 	int height;
-	int value;
+	boolean isPi;
 	
-	BufferedImage carIcon;
+	BufferedImage turtleIcon;
 	
-	public Car(int width, int height, int value, BufferedImage carIcon){
+	public Turtle(int width, int height, boolean isPi, BufferedImage turtleIcon){
 		this.width = width;
 		this.height = height;
-		this.value = value;
-		this.carIcon = carIcon;
-	}
-	
-	public int getValue(){
-		return value;
+		this.isPi = isPi;
+		this.turtleIcon = turtleIcon;
 	}
 	
 	@Override
@@ -53,9 +49,13 @@ public class Car implements IEntity {
 		return height;
 	}
 
+	public boolean getChainLength() {
+		return isPi;
+	}
+	
 	@Override
 	public BufferedImage getEntityIcon() {
-		return carIcon;
+		return turtleIcon;
 	}
 
 	@Override

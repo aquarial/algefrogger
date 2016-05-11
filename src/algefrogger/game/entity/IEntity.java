@@ -1,4 +1,4 @@
-package algefrogger.entity;
+package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 

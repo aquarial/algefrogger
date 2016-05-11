@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import algefrogger.entity.IEntity;
+import algefrogger.game.entity.IEntity;
 
 public class GamePanel extends JPanel {
     private static final long serialVersionUID = 1L;
