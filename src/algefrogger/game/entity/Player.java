@@ -1,34 +1,32 @@
-package algefrogger.entity;
+package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
-public class Turtle implements IEntity {
+public class Player implements IEntity{
 
 	int x;
 	int y;
 	int width;
 	int height;
-	boolean isPi;
 	
-	BufferedImage turtleIcon;
-	
-	public Turtle(int width, int height, boolean isPi, BufferedImage turtleIcon){
+	BufferedImage playerIcon;
+
+	public Player(int width, int height, BufferedImage playerIcon){
 		this.width = width;
 		this.height = height;
-		this.isPi = isPi;
-		this.turtleIcon = turtleIcon;
+		this.playerIcon = playerIcon;
 	}
 	
 	@Override
 	public void setX(int x) {
 		this.x = x;
 	}
-
+	
 	@Override
-	public void setY(int y) {
+	public void setY(int y){
 		this.y = y;
 	}
-
+	
 	@Override
 	public int getX() {
 		return x;
@@ -49,13 +47,9 @@ public class Turtle implements IEntity {
 		return height;
 	}
 
-	public boolean getChainLength() {
-		return isPi;
-	}
-	
 	@Override
 	public BufferedImage getEntityIcon() {
-		return turtleIcon;
+		return playerIcon;
 	}
 
 	@Override
