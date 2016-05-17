@@ -16,6 +16,12 @@ public class GamePanel extends JPanel {
     private int height;
     private GameModel model;
 
+    /**
+     * Sets up GamePanel
+     * 
+     * @param nwidth
+     * @param nheight
+     */
     GamePanel(int nwidth, int nheight) {
         super();
         width = nwidth;
@@ -24,9 +30,9 @@ public class GamePanel extends JPanel {
         model = new GameModel();
     }
 
-    public void repaint(Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
 
-        // levelstate.getentities
         for (IEntity i : model.getAllIEntities()) {
             BufferedImage image = i.getEntityIcon();
             g.drawImage(image, i.getX(), i.getY(), null);
