@@ -1,11 +1,14 @@
 package algefrogger.game;
 
+import algefrogger.game.entity.*;
+
+//Game logic
 public class GameModel {
     private LevelState state;
     
     /*  _ _ _ _ _ _ _ _ _ _ _ _ _ 
-     * |3 | | | 8 | | | 4 | | | 2|
-     * |= = = =   = = = =   = =  |
+     * |3 | | | 8 | | | 4 | | | 2| - Answers
+     * |= = = =   = = = =   = =  | - 4 long log (ln55)
      * | e e   e e   e e   e e   | - 2 long e-turtle
      * |=   = = = = =   = = = =  | - 5 long log (ln148)
      * |  = = =   = = =   = = =  | - 3 long log (ln20)     
@@ -17,4 +20,7 @@ public class GameModel {
      * |----3-----4-----8--------| - car lane
      * |_ _ _ _ _ _ X _ _ _ _ _ _| - starting row
      */
+    
+    
+    
 }
