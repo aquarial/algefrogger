@@ -2,35 +2,26 @@ package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
+import algefrogger.IO.Resources;
+
 public class Log implements IEntity {
 
     int x;
     int y;
-    int width;
-    int height;
-    int logLength;
-
-    String logText;
-
     BufferedImage logIcon;
 
-    public Log(int width, int height, int logLength, BufferedImage logIcon) {
-        this.width = width;
-        this.height = height;
-        this.logLength = logLength;
-        this.logIcon = logIcon;
-
-        logText = "ln(" + ((int) Math.pow(Math.E, logLength)) + ")";
-    }
-
-    @Override
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = y;
+    /**
+     * Constructs a Log
+     * 
+     * @param xpos
+     * @param ypos
+     * @param logLength
+     *            Must be 3, 4, or 5
+     */
+    public Log(int xpos, int ypos, int logLength) {
+        x = xpos;
+        y = ypos;
+        logIcon = Resources.loadImageByName("Log" + logLength);
     }
 
     @Override
@@ -45,12 +36,12 @@ public class Log implements IEntity {
 
     @Override
     public int getWidth() {
-        return width;
+        return logIcon.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return logIcon.getHeight();
     }
 
     @Override
@@ -61,7 +52,6 @@ public class Log implements IEntity {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-
     }
 
 }
