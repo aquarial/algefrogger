@@ -4,7 +4,12 @@ package algefrogger.game;
 public class LevelState {
 
     //@formatter:off
-    /*  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+    /* 
+     * LevelState uses (x,y) coordinates to place objects.
+     * (0,0)     is the pixel in the upper-left corner.
+     * (520,480) is the pixel in the lower-right corner.
+     * 
+     *  _ _ _ _ _ _ _ _ _ _ _ _ _ 
      * |3 | | | 8 | | | 4 | | | 2|
      * |= = = =   = = = =   = =  |
      * | e e   e e   e e   e e   | - 2 long e-turtle
