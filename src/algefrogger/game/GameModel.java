@@ -1,11 +1,8 @@
 package algefrogger.game;
 
-import algefrogger.game.entity.*;
-
 //Game logic
 public class GameModel {
     private LevelState state;
-
 
     public GameModel() {
         state = new LevelState();
