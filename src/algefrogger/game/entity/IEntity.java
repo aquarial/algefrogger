@@ -4,10 +4,6 @@ import java.awt.image.BufferedImage;
 
 public interface IEntity {
 
-    void setX(int x);
-
-    void setY(int y);
-
     /** @return X coordinate */
     int getX();
 
