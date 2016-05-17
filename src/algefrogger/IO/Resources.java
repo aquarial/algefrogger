@@ -16,9 +16,11 @@ public class Resources {
      */
     public static BufferedImage loadImageByName(String name) {
         InputStream inputstream = Thread.currentThread().getClass()
-                .getResourceAsStream("/res/pics/" + name + ".png");
+                .getResourceAsStream("/pics/" + name + ".png");
         try {
+
             return ImageIO.read(inputstream);
+
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Could not find image " + name + ".png");
@@ -30,7 +32,7 @@ public class Resources {
 
     /**
      * Scales input image so its width is new_width
-     * 
+     *
      * @param imageToScale
      * @param new_width
      * @return Scaled image
