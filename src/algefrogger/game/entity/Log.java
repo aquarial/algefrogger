@@ -2,66 +2,56 @@ package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
+import algefrogger.IO.Resources;
+
 public class Log implements IEntity {
 
-	int x;
-	int y;
-	int width;
-	int height;
-	int logLength;
-	
-	String logText;
-	
-	BufferedImage logIcon;
-	
-	public Log(int width, int height, int logLength, BufferedImage logIcon){
-		this.width = width;
-		this.height = height;
-		this.logLength = logLength;
-		this.logIcon = logIcon;
-		
-		logText = "ln(" + ((int)Math.pow(Math.E, logLength)) + ")";
-	}
-	
-	@Override
-	public void setX(int x) {
-		this.x = x;
-	}
+    int x;
+    int y;
+    BufferedImage logIcon;
 
-	@Override
-	public void setY(int y) {
-		this.y = y;
-	}
+    /**
+     * Constructs a Log
+     * 
+     * @param xpos
+     * @param ypos
+     * @param logLength
+     *            Must be 3, 4, or 5
+     */
+    public Log(int xpos, int ypos, int logLength) {
+        x = xpos;
+        y = ypos;
+        logIcon = Resources.loadImageByName("Log" + logLength);
+    }
 
-	@Override
-	public int getX() {
-		return x;
-	}
+    @Override
+    public int getX() {
+        return x;
+    }
 
-	@Override
-	public int getY() {
-		return y;
-	}
+    @Override
+    public int getY() {
+        return y;
+    }
 
-	@Override
-	public int getWidth() {
-		return width;
-	}
+    @Override
+    public int getWidth() {
+        return logIcon.getWidth();
+    }
 
-	@Override
-	public int getHeight() {
-		return height;
-	}
+    @Override
+    public int getHeight() {
+        return logIcon.getHeight();
+    }
 
-	@Override
-	public BufferedImage getEntityIcon() {
-		return logIcon;
-	}
+    @Override
+    public BufferedImage getEntityImage() {
+        return logIcon;
+    }
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+    }
 
 }

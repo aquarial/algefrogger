@@ -2,7 +2,6 @@ package algefrogger;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -16,29 +15,39 @@ public class GamePanel extends JPanel {
     private int height;
     private GameModel model;
 
+    /**
+     * Sets up GamePanel
+     * 
+     * @param nwidth
+     * @param nheight
+     */
     GamePanel(int nwidth, int nheight) {
         super();
         width = nwidth;
         height = nheight;
-        setBackground(Color.GREEN);
         model = new GameModel();
+        setBackground(Color.GREEN);
     }
 
-    public void repaint(Graphics g) {
-
-        // levelstate.getentities
+    @Override
+    public void paintComponent(Graphics g) {
+        g.clearRect(0, 0, width, height);
         for (IEntity i : model.getAllIEntities()) {
-            BufferedImage image = i.getEntityIcon();
-            g.drawImage(image, i.getX(), i.getY(), null);
+            g.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
         }
     }
 
     public void startgame() {
         model = new GameModel();
-        while (true) {
-            this.sleep(60);
-            this.repaint();
-        }
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    GamePanel.this.sleep(60);
+                    GamePanel.this.repaint();
+                }
+            }
+        }.start();
     }
 
     private void sleep(int milliseconds) {
