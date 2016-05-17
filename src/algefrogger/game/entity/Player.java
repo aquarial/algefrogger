@@ -48,7 +48,7 @@ public class Player implements IEntity{
 	}
 
 	@Override
-	public BufferedImage getEntityIcon() {
+	public BufferedImage getEntityImage() {
 		return playerIcon;
 	}
 

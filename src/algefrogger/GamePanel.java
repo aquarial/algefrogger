@@ -33,7 +33,7 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         g.clearRect(0, 0, width, height);
         for (IEntity i : model.getAllIEntities()) {
-            g.drawImage(i.getEntityIcon(), i.getX(), i.getY(), null);
+            g.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
         }
     }
 
