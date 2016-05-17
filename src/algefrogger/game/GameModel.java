@@ -5,19 +5,32 @@ import java.util.List;
 
 import algefrogger.game.entity.IEntity;
 
-//Game logic
+/**
+ * Holds and runs a frogger game
+ */
 public class GameModel {
     private LevelState state;
 
+    /**
+     * Resets LevelState
+     */
     public GameModel() {
         state = new LevelState();
     }
 
+    /**
+     * Gets a List of all the the IEntites in the LeveState
+     * 
+     * @return
+     */
     public List<IEntity> getAllIEntities() {
         return new ArrayList<>();
     }
 
-    void movePlayerLeft() {
+    /**
+     * Moves player one unit to the left
+     */
+    public void movePlayerLeft() {
         // if (state.playerpos() < 40){
         // return;
         // }
