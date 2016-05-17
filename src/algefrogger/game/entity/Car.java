@@ -1,26 +1,29 @@
 package algefrogger.game.entity;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Car implements IEntity {
 
     int x;
     int y;
-    int width;
-    int height;
-    int value;
-
+    int carvalue;
     BufferedImage carIcon;
 
-    public Car(int width, int height, int value, BufferedImage carIcon) {
-        this.width = width;
-        this.height = height;
-        this.value = value;
-        this.carIcon = carIcon;
+    public Car(int xpos, int ypos, int value) {
+        x = xpos;
+        y = ypos;
+        carIcon = new BufferedImage(20, 20, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D g = carIcon.createGraphics();
+        g.setColor(Color.RED);
+        g.fillRect(0, 0, carIcon.getWidth(), carIcon.getHeight());
+        g.setColor(Color.BLACK);
+        g.drawString("" + value, 0, 0);
     }
 
     public int getValue() {
-        return value;
+        return carvalue;
     }
 
     @Override
@@ -35,12 +38,12 @@ public class Car implements IEntity {
 
     @Override
     public int getWidth() {
-        return width;
+        return carIcon.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return carIcon.getHeight();
     }
 
     @Override
@@ -51,7 +54,6 @@ public class Car implements IEntity {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-
     }
 
 }
