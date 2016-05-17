@@ -41,18 +41,14 @@ public class LevelState {
         entities = new ArrayList<>();
 
         // put cars and things in place
-        BufferedImage image = Resources.loadImageByName("x");
-
-        IEntity car00 = new Car(20, 20, 7, image);
-        car00.setX(40);
-        car00.setY(60);
-        entities.add(car00);
-        
-        image = Resources.loadImageByName("Log5");
-        car00 = new Car(20, 20, 7, image);
-        car00.setX(40);
-        car00.setY(440);
-        entities.add(car00);
+        // BufferedImage image = Resources.loadImageByName("x");
+        //
+        // IEntity car00 = new Car(20, 20, 7, image);
+        // entities.add(car00);
+        //
+        // image = Resources.loadImageByName("Log5");
+        // car00 = new Car(20, 20, 7, image);
+        // entities.add(car00);
     }
 
     /**
