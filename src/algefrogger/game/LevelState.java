@@ -1,7 +1,19 @@
 package algefrogger.game;
 
-//All IEntity's
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
+import algefrogger.IO.Resources;
+import algefrogger.game.entity.Car;
+import algefrogger.game.entity.IEntity;
+
+/**
+ * Holds position data of a level
+ */
 public class LevelState {
+
+    private List<IEntity> entities;
 
     //@formatter:off
     /* 
@@ -26,6 +38,39 @@ public class LevelState {
     //@formatter:on
 
     public LevelState() {
+        entities = new ArrayList<>();
+
         // put cars and things in place
+        BufferedImage image = Resources.loadImageByName("x");
+
+        IEntity car00 = new Car(20, 20, 7, image);
+        car00.setX(40);
+        car00.setY(60);
+        entities.add(car00);
+        
+        image = Resources.loadImageByName("Log5");
+        car00 = new Car(20, 20, 7, image);
+        car00.setX(40);
+        car00.setY(440);
+        entities.add(car00);
     }
+
+    /**
+     * Adds arg to internal list
+     * 
+     * @param arg
+     */
+    void addIEntity(IEntity arg) {
+        entities.add(arg);
+    }
+
+    /**
+     * All the entities that make up this level
+     * 
+     * @return
+     */
+    List<IEntity> getEntities() {
+        return entities;
+    }
+
 }

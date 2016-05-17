@@ -24,7 +24,7 @@ public class GameModel {
      * @return
      */
     public List<IEntity> getAllIEntities() {
-        return new ArrayList<>();
+        return state.getEntities();
     }
 
     /**
