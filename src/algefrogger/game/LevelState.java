@@ -7,6 +7,7 @@ import java.util.List;
 import algefrogger.IO.Resources;
 import algefrogger.game.entity.Car;
 import algefrogger.game.entity.IEntity;
+import algefrogger.game.entity.Log;
 
 /**
  * Holds position data of a level
