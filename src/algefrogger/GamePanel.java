@@ -80,26 +80,33 @@ public class GamePanel extends JPanel {
 		return new KeyAdapter() {
 
 			@Override
+			public void keyReleased(KeyEvent e) {
+				int keyCode = e.getExtendedKeyCode();
+				int index = Arrays.binarySearch(validCharKeyCodes, keyCode);
+				if (index >= 0) {
+					keyIsNotPushed[index] = true;
+				}
+			}
+
+			@Override
 			public void keyPressed(KeyEvent e) {
 				handlePushedKey(e);
 			}
 
-			// @Override
-			// public void keyReleased(KeyEvent e) {
-			// handlePushedKey(e);
-			// }
-
 			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40 };
 			char[] characters = new char[] { 'l', 'u', 'r', 'd' };
+			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true };
 
 			void handlePushedKey(KeyEvent e) {
 				int keyCode = e.getExtendedKeyCode();
 				int index = Arrays.binarySearch(validCharKeyCodes, keyCode);
 
-				if (index >= 0) {
+				if (index >= 0 && keyIsNotPushed[index]) {
 					model.addKeyInput(characters[index]);
+					keyIsNotPushed[index] = false;
 				}
 			}
+
 		};
 	}
 }
