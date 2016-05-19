@@ -58,6 +58,7 @@ public class GamePanel extends JPanel {
                 while (true) {
                     GamePanel.this.sleep(60);
                     GamePanel.this.repaint();
+                    model.update();
                 }
             }
         }.start();

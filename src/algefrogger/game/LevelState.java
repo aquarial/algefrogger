@@ -12,7 +12,7 @@ import algefrogger.game.entity.Player;
 public class LevelState {
 
     private List<IEntity> entities;
-
+    private Player player;
     //@formatter:off
     /* 
      * LevelState uses (x,y) coordinates to place objects.
@@ -38,8 +38,7 @@ public class LevelState {
     public LevelState() {
         entities = new ArrayList<>();
         
-        // Player should always be entities.get(0)
-        addIEntity(new Player(240, 480));
+        player = new Player(240, 480);
         
         // put cars and things in place
         // BufferedImage image = Resources.loadImageByName("x");
@@ -75,7 +74,7 @@ public class LevelState {
      * @return X position
      */
     public int playerXPos(){
-    	return entities.get(0).getX();
+    	return player.getX();
     }
     
     /**
@@ -83,12 +82,12 @@ public class LevelState {
      * @return Y position
      */
     public int playerYPos() {
-    	return entities.get(0).getY();
+    	return player.getY();
     }
     
     public void movePlayerBy(int x, int y){
-//    	entities.get(0).setX(entities.get(0).getX() + x);
-//    	entities.get(0).setY(entities.get(0).getY() + y);
+//    	player.setX(player.getX() + x);
+//    	player.setY(player.getY() + y);
     }
 
 }
