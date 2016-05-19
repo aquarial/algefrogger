@@ -59,7 +59,7 @@ public class Player implements IEntity {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-
+    	
     }
 
 }

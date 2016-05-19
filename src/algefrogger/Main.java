@@ -16,7 +16,6 @@ public class Main {
 
         GamePanel panel = new GamePanel(width, height);
         panel.setPreferredSize(new Dimension(width, height));
-        panel.setSize(width, height);
         frame.getContentPane().add(panel);
 
         frame.setSize(frame.getPreferredSize());
