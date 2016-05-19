@@ -71,6 +71,12 @@ public class GameModel {
 		}
 		state.movePlayerBy(0, 40);
 	}
+	
+	public void addKeyInput(char direction) {
+		// lastDirection = direction;
+		// moved = true
+		System.out.println(direction);
+	}
 
 	/**
 	 * This method shouldn't be like this, but I don't care what you think
