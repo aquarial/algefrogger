@@ -37,6 +37,12 @@ public class GamePanel extends JPanel {
         g2.setColor(Color.GREEN);
         g2.fillRect(0, 0, width, height);
 
+        g2.setColor(Color.BLUE);
+        g2.fillRect(0, 40, width, 40 * 5);
+
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0, 7 * 40, width, 40 * 4);
+
         // Draw all the entities
         for (IEntity i : model.getAllIEntities()) {
             g2.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
