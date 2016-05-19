@@ -9,7 +9,7 @@ public class Log implements IEntity {
     int x;
     int y;
     final static int SPEED = 5;
-    BufferedImage logIcon;
+    private BufferedImage logIcon;
 
     /**
      * Constructs a Log

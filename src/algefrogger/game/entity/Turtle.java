@@ -19,8 +19,8 @@ public class Turtle implements IEntity {
     public Turtle(int xpos, int ypos, boolean isPi) {
 
         int numberOfTurtles = 0;
-        BufferedImage turtle = new BufferedImage(0, 0,
-                BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage turtle;
+        
         if (isPi) {
             numberOfTurtles = 3;
             turtle = Resources.loadImageByName("pi");
