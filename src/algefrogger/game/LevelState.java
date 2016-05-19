@@ -49,15 +49,23 @@ public class LevelState {
         
         player = new Player(240, 480);
         
-        // put cars and things in place
-        // BufferedImage image = Resources.loadImageByName("x");
-        //
-        // IEntity car00 = new Car(20, 20, 7, image);
-        // entities.add(car00);
-        //
-        // image = Resources.loadImageByName("Log5");
-        // car00 = new Car(20, 20, 7, image);
-        // entities.add(car00);
+        addIEntity(player);
+        
+        // e-turtles
+        for (int i = 0; i < 4; i++)
+        	addIEntity(new Turtle(120*i + 40, 80, false));
+        // pi-turtles
+        for (int i = 0; i < 3; i++)
+        	addIEntity(new Turtle(160*i - 40, 200, true));
+        // 3-logs
+        for (int i = 0; i < 3; i++)
+        	addIEntity(new Log(160 * i + 40, 160, 3));
+        // 4-logs
+        for (int i = 2; i < 2; i++)
+        	addIEntity(new Log(200 * i, 40, 4));
+        // 5-logs
+        for (int i = 2; i < 3; i++)
+        	addIEntity(new Log(240*i + 80,1,5));
     }
 
     /**
@@ -127,8 +135,8 @@ public class LevelState {
     }
     
     public void movePlayerBy(int x, int y){
-//    	player.setX(player.getX() + x);
-//    	player.setY(player.getY() + y);
+    	player.setX(player.getX() + x);
+    	player.setY(player.getY() + y);
     }
 
 }
