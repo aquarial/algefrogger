@@ -2,6 +2,7 @@ package algefrogger;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -26,15 +27,27 @@ public class GamePanel extends JPanel {
         width = nwidth;
         height = nheight;
         model = new GameModel();
-        setBackground(Color.GREEN);
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        g.clearRect(0, 0, width, height);
+        Graphics2D g2 = (Graphics2D) g;
+
+        // Erase background
+        g2.setColor(Color.GREEN);
+        g2.fillRect(0, 0, width, height);
+
+        g2.setColor(Color.BLUE);
+        g2.fillRect(0, 40, width, 40 * 5);
+
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0, 7 * 40, width, 40 * 4);
+
+        // Draw all the entities
         for (IEntity i : model.getAllIEntities()) {
-            g.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
+            g2.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
         }
+
     }
 
     public void startgame() {

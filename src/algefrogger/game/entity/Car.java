@@ -27,6 +27,16 @@ public class Car implements IEntity {
     }
 
     @Override
+    public void setX(int new_x) {
+        x = new_x;
+    }
+
+    @Override
+    public void setY(int new_y) {
+        y = new_y;
+    }
+
+    @Override
     public int getX() {
         return x;
     }
