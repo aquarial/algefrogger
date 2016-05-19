@@ -1,13 +1,9 @@
 package algefrogger.game;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import algefrogger.IO.Resources;
-import algefrogger.game.entity.Car;
 import algefrogger.game.entity.IEntity;
-import algefrogger.game.entity.Log;
 import algefrogger.game.entity.Player;
 
 /**
@@ -43,7 +39,7 @@ public class LevelState {
         entities = new ArrayList<>();
         
         // Player should always be entities.get(0)
-        addIEntity(new Player(240, 480, Resources.loadImageByName(""/*Replace with player image name*/)));
+        addIEntity(new Player(240, 480));
         
         // put cars and things in place
         // BufferedImage image = Resources.loadImageByName("x");
@@ -74,6 +70,25 @@ public class LevelState {
         return entities;
     }
     
+    /**
+     * Gets player X position
+     * @return X position
+     */
+    public int playerXPos(){
+    	return entities.get(0).getX();
+    }
     
+    /**
+     * Gets player Y position
+     * @return Y position
+     */
+    public int playerYPos() {
+    	return entities.get(0).getY();
+    }
+    
+    public void movePlayerBy(int x, int y){
+//    	entities.get(0).setX(entities.get(0).getX() + x);
+//    	entities.get(0).setY(entities.get(0).getY() + y);
+    }
 
 }

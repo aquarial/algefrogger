@@ -1,5 +1,6 @@
 package algefrogger.game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EquationGenerator {
@@ -87,6 +88,28 @@ public class EquationGenerator {
 		else
 			tmp = c + "";
 
+		return tmp;
+	}
+	
+	/**
+	 * Generates fake answers for answers spots in game
+	 * @param fakeNumbers Number of fake answers to generate (can only go up to ansMax - 1)
+	 * @return ArrayList with specified number of fake answers
+	 */
+	public ArrayList<Integer> getFakeAnswers(int fakeNumbers){
+		ArrayList<Integer> tmp = new ArrayList<>();
+		int fakeAns = r.nextInt(ansMax) + 1;
+		
+		for(int i = 0; i < fakeNumbers; i++){
+			if (fakeAns != getAnswer() && !tmp.contains(fakeAns))
+				tmp.add(fakeAns);
+			else{
+				i--;
+				fakeAns = r.nextInt(ansMax) + 1;
+			}
+				
+		}
+		
 		return tmp;
 	}
 }

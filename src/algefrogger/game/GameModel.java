@@ -30,10 +30,39 @@ public class GameModel {
      * Moves player one unit to the left
      */
     public void movePlayerLeft() {
-        // if (state.playerpos() < 40){
-        // return;
-        // }
-        // state.moveplayerby(-40, 0);
+         if (state.playerXPos() < 40){
+         return;
+         }
+         state.movePlayerBy(-40, 0);
+    }
+    /**
+     * Moves player one unit to the right
+     */
+    public void movePlayerRight() {
+    	if (state.playerXPos() >= 480){
+    		return;
+    	}
+    	state.movePlayerBy(40, 0);
+    }
+    
+    /**
+     * moves player 1 unit up
+     */
+    public void movePlayerUp() {
+    	if (state.playerYPos() < 40){
+    		return;
+    	}
+    	state.movePlayerBy(0, -40);
+    }
+    
+    /**
+     * Moves player one unit down
+     */
+    public void movePlayerDown() {
+    	if (state.playerYPos() >= 440){
+    		return;
+    	}
+    	state.movePlayerBy(0, 40);
     }
 
 }
