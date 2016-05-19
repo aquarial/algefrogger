@@ -19,7 +19,8 @@ public class Resources {
                 .getResourceAsStream("/pics/" + name + ".png");
         try {
 
-            return ImageIO.read(inputstream);
+            BufferedImage image = ImageIO.read(inputstream);
+            return scaleImage(image, 40);
 
         } catch (IOException e) {
             e.printStackTrace();

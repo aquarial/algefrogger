@@ -2,6 +2,8 @@ package algefrogger.game.entity;
 
 import java.awt.image.BufferedImage;
 
+import algefrogger.IO.Resources;
+
 public class Player implements IEntity {
 
     int x;
@@ -11,10 +13,12 @@ public class Player implements IEntity {
 
     BufferedImage playerIcon;
 
-    public Player(int width, int height, BufferedImage playerIcon) {
-        this.width = width;
-        this.height = height;
-        this.playerIcon = playerIcon;
+    public Player(int xpos, int ypos) {
+        x = xpos;
+        y = ypos;
+        width = 40;
+        height = 40;
+        playerIcon = Resources.loadImageByName("x");
     }
 
     @Override
