@@ -1,6 +1,5 @@
 package algefrogger.game;
 
-import java.awt.Graphics;
 import java.util.List;
 
 import algefrogger.game.entity.IEntity;
