@@ -10,6 +10,12 @@ public interface IEntity {
     /** @return Y coordinate */
     int getY();
 
+    /** Moves entites to X */
+    void setX(int new_x);
+
+    /** Moves entites to X */
+    void setY(int new_y);
+
     /** @return Width of image */
     int getWidth();
 
