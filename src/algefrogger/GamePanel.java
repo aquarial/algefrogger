@@ -3,6 +3,9 @@ package algefrogger;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 import javax.swing.JPanel;
 
@@ -24,6 +27,7 @@ public class GamePanel extends JPanel {
 	 */
 	GamePanel(int nwidth, int nheight) {
 		super();
+		addKeyListener(createKeyListener());
 		width = nwidth;
 		height = nheight;
 		model = new GameModel();
@@ -70,5 +74,32 @@ public class GamePanel extends JPanel {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	KeyAdapter createKeyListener() {
+		return new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				handlePushedKey(e);
+			}
+
+			// @Override
+			// public void keyReleased(KeyEvent e) {
+			// handlePushedKey(e);
+			// }
+
+			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40 };
+			char[] characters = new char[] { 'l', 'u', 'r', 'd' };
+
+			void handlePushedKey(KeyEvent e) {
+				int keyCode = e.getExtendedKeyCode();
+				int index = Arrays.binarySearch(validCharKeyCodes, keyCode);
+
+				if (index >= 0) {
+					model.addKeyInput(characters[index]);
+				}
+			}
+		};
 	}
 }
