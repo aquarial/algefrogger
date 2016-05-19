@@ -14,7 +14,7 @@ public class Car implements IEntity {
     public Car(int xpos, int ypos, int value) {
         x = xpos;
         y = ypos;
-        carIcon = new BufferedImage(20, 20, BufferedImage.TYPE_4BYTE_ABGR);
+        carIcon = new BufferedImage(40, 40, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = carIcon.createGraphics();
         g.setColor(Color.RED);
         g.fillRect(0, 0, carIcon.getWidth(), carIcon.getHeight());

@@ -13,9 +13,11 @@ public class Player implements IEntity {
 
     BufferedImage playerIcon;
 
-    public Player() {
-        width = 20;
-        height = 20;
+    public Player(int xpos, int ypos) {
+        x = xpos;
+        y = ypos;
+        width = 40;
+        height = 40;
         playerIcon = Resources.loadImageByName("x");
     }
 

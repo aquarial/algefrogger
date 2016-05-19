@@ -28,14 +28,14 @@ public class Turtle implements IEntity {
             turtle = Resources.loadImageByName("e");
         }
 
-        width = 20 * numberOfTurtles;
-        height = 20;
+        width = 40 * numberOfTurtles;
+        height = 40;
 
         turtleIcon = new BufferedImage(width, height,
                 BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g2 = turtleIcon.createGraphics();
         for (int i = 0; i < numberOfTurtles; i++) {
-            g2.drawImage(turtle, i * 20, 0, null);
+            g2.drawImage(turtle, i * 40, 0, null);
         }
         g2.dispose();
 
