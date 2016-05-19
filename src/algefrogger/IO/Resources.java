@@ -35,14 +35,14 @@ public class Resources {
 	 * Scales input image so its width is new_width
 	 *
 	 * @param imageToScale
-	 * @param new_width
+	 * @param new_height
 	 * @return Scaled image
 	 */
 	public static BufferedImage scaleImage(BufferedImage imageToScale,
-			int new_width) {
-		float ratio = imageToScale.getHeight()
-				/ (float) imageToScale.getWidth();
-		int new_height = (int) (ratio * new_width);
+			int new_height) {
+		float ratio = imageToScale.getWidth()
+				/ (float) imageToScale.getHeight();
+		int new_width = (int) (ratio * new_height);
 
 		BufferedImage newImage = new BufferedImage(new_width, new_height,
 				imageToScale.getType());
@@ -50,5 +50,4 @@ public class Resources {
 				new_height, null);
 		return newImage;
 	}
-
 }
