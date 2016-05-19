@@ -8,6 +8,7 @@ public class Log implements IEntity {
 
     int x;
     int y;
+    final static int SPEED = 5;
     BufferedImage logIcon;
 
     /**
@@ -59,9 +60,9 @@ public class Log implements IEntity {
         return logIcon;
     }
 
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-    }
-
+	@Override
+	public int getSpeed() {
+		return SPEED;
+	}
+    
 }

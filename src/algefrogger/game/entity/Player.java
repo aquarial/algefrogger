@@ -10,6 +10,7 @@ public class Player implements IEntity {
     int y;
     int width;
     int height;
+    final static int SPEED = 0;
 
     BufferedImage playerIcon;
 
@@ -18,6 +19,7 @@ public class Player implements IEntity {
         y = ypos;
         width = 40;
         height = 40;
+        //Change once tested
         playerIcon = Resources.loadImageByName("x");
     }
 
@@ -56,10 +58,9 @@ public class Player implements IEntity {
         return playerIcon;
     }
 
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-    	
-    }
-
+	@Override
+	public int getSpeed() {
+		return SPEED;
+	}
+    
 }

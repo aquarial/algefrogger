@@ -3,8 +3,11 @@ package algefrogger.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import algefrogger.game.entity.Car;
 import algefrogger.game.entity.IEntity;
+import algefrogger.game.entity.Log;
 import algefrogger.game.entity.Player;
+import algefrogger.game.entity.Turtle;
 
 /**
  * Holds position data of a level
@@ -12,6 +15,9 @@ import algefrogger.game.entity.Player;
 public class LevelState {
 
     private List<IEntity> entities;
+    private List<Log> logs;
+    private List<Turtle> turtles;
+    private List<Car> cars;
     private Player player;
     //@formatter:off
     /* 
@@ -37,6 +43,9 @@ public class LevelState {
 
     public LevelState() {
         entities = new ArrayList<>();
+        logs = new ArrayList<>();
+        turtles = new ArrayList<>();
+        cars = new ArrayList<>();
         
         player = new Player(240, 480);
         
@@ -58,15 +67,47 @@ public class LevelState {
      */
     void addIEntity(IEntity arg) {
         entities.add(arg);
+
+        if (arg instanceof Log)
+        	logs.add((Log)arg);
+        
+        else if(arg instanceof Turtle)
+        	turtles.add((Turtle)arg);
+        
+        else if(arg instanceof Car)
+        	cars.add((Car)arg);
     }
 
     /**
      * All the entities that make up this level
-     * 
      * @return
      */
     List<IEntity> getEntities() {
         return entities;
+    }
+    
+    /**
+     * All the entities that make up this level
+     * @return
+     */
+    List<Log> getLogs() {
+        return logs;
+    }
+    
+    /**
+     * All the entities that make up this level
+     * @return
+     */
+    List<Turtle> getTurtles() {
+        return turtles;
+    }
+    
+    /**
+     * All the entities that make up this level
+     * @return
+     */
+    List<Car> getCars() {
+        return cars;
     }
     
     /**

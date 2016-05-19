@@ -21,9 +21,10 @@ public interface IEntity {
 
     /** @return Height of image */
     int getHeight();
+    
+    /** @return X movement speed of entity per tick */
+    int getSpeed();
 
     /** @return Entity image */
     BufferedImage getEntityImage();
-
-    void update();
 }

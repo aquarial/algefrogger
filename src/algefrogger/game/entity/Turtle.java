@@ -11,11 +11,12 @@ public class Turtle implements IEntity {
     int y;
     int width;
     int height;
+    final static int SPEED = -5;
     boolean isPi;
 
     BufferedImage turtleIcon;
 
-    public Turtle(boolean isPi) {
+    public Turtle(int xpos, int ypos, boolean isPi) {
 
         int numberOfTurtles = 0;
         BufferedImage turtle = new BufferedImage(0, 0,
@@ -30,7 +31,10 @@ public class Turtle implements IEntity {
 
         width = 40 * numberOfTurtles;
         height = 40;
-
+        
+        x = xpos;
+        y = ypos;
+        
         turtleIcon = new BufferedImage(width, height,
                 BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g2 = turtleIcon.createGraphics();
@@ -81,10 +85,9 @@ public class Turtle implements IEntity {
         return turtleIcon;
     }
 
-    @Override
-    public void update() {
-        // TODO Auto-generated method stub
-
-    }
-
+	@Override
+	public int getSpeed() {
+		return SPEED;
+	}
+    
 }
