@@ -134,6 +134,14 @@ public class LevelState {
     	return player.getY();
     }
     
+    /**
+     * Get player being used
+     * @return Player object
+     */
+    public Player getPlayer() {
+    	return player;
+    }
+    
     public void movePlayerBy(int x, int y){
     	player.setX(player.getX() + x);
     	player.setY(player.getY() + y);
