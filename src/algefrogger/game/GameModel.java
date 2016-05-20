@@ -3,6 +3,7 @@ package algefrogger.game;
 import java.util.List;
 
 import algefrogger.game.entity.IEntity;
+import algefrogger.game.entity.Player;
 
 /**
  * Holds and runs a frogger game
@@ -75,12 +76,22 @@ public class GameModel {
 		lastPushedButton = direction;
 		recentPush = true;
 	}
+	
+	public int checkBelowSpeed() {
+		Player p = state.getPlayer();
+		for (IEntity IE : state.getEntities()){
+			if (IE == p) continue;
+			if (IE.getX() < p.getX() + 20 && p.getX() + 20 < IE.getX() + IE.getWidth() && p.getY() == IE.getY())
+				return IE.getSpeed();
+		}
+		return 0;
+	}
 
 	/**
 	 * This method shouldn't be like this, but I don't care what you think
 	 */
 	public void update() {
-		IEntity player = state.getPlayer();
+		Player player = state.getPlayer();
 		
 		if (recentPush){
 			switch (lastPushedButton){
@@ -90,7 +101,9 @@ public class GameModel {
 			case 'r': movePlayerRight(); break;
 			}
 			recentPush = false;
+			player.setSpeed(checkBelowSpeed());
 		}
+		
 		
 		//Safeguard player position checks (need to test once player is working)
 		if (state.playerXPos() < 0)
@@ -100,7 +113,7 @@ public class GameModel {
 		else if (state.playerYPos() > 440)
 			player.setY(440);
 		
-		//Player jumping into answers (need to test once player & water movement is working)
+		//Player jumping into answer spots
 		else if (state.playerYPos() < 40){
 			if (0 < state.playerXPos() + 20 && state.playerXPos() + 20 < 45)
 				player.setX(0);

@@ -48,6 +48,7 @@ public class GamePanel extends JPanel {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 7 * 40, width, 40 * 4);
 		
+		//Lily Pads
 		for (int i = 0; i < 4; i++){
 			g2.setColor(Color.BLUE);
 			g2.fillRect(160 * i, 2, 40, 38);

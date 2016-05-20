@@ -10,7 +10,7 @@ public class Player implements IEntity {
     int y;
     int width;
     int height;
-    final static int SPEED = 0;
+    int speed = 0;
 
     BufferedImage playerIcon;
 
@@ -60,7 +60,11 @@ public class Player implements IEntity {
 
 	@Override
 	public int getSpeed() {
-		return SPEED;
+		return speed;
+	}
+	
+	public void setSpeed(int s) {
+		speed = s;
 	}
     
 }
