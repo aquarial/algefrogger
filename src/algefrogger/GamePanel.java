@@ -36,7 +36,8 @@ public class GamePanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
+		
+		IEntity p = model.getAllIEntities().get(0);
 		// Erase background
 		g2.setColor(Color.GREEN);
 		g2.fillRect(0, 0, width, height);
@@ -46,11 +47,20 @@ public class GamePanel extends JPanel {
 
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 7 * 40, width, 40 * 4);
+		
+		for (int i = 0; i < 4; i++){
+			g2.setColor(Color.BLUE);
+			g2.fillRect(160 * i, 2, 40, 38);
+			g2.setColor(Color.GREEN);
+			g2.fillRect(160* i + 10, 12, 20, 20);
+		}
 
 		// Draw all the entities
 		for (IEntity i : model.getAllIEntities()) {
 			g2.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
 		}
+		// Draws player back on top
+		g2.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
 
 	}
 
