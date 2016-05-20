@@ -81,5 +81,12 @@ public class GameModel {
 	 */
 	public void update() {
 
+		for (IEntity IE : state.getEntities()){
+			IE.setX(IE.getX() + IE.getSpeed());
+			if (IE.getSpeed() > 0 && IE.getX() - IE.getWidth() >= 520)
+				IE.setX(-IE.getWidth());
+			else if (IE.getSpeed() < 0 && IE.getX() + IE.getWidth() <= 0)
+				IE.setX(520 + IE.getWidth());
+		}
 	}
 }

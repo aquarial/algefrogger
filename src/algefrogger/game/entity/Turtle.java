@@ -11,7 +11,7 @@ public class Turtle implements IEntity {
 	int y;
 	int width;
 	int height;
-	final static int SPEED = -5;
+	int speed;
 	boolean isPi;
 
 	BufferedImage turtleIcon;
@@ -22,9 +22,11 @@ public class Turtle implements IEntity {
 		BufferedImage turtle;
 
 		if (isPi) {
+			speed = 5;
 			numberOfTurtles = 3;
 			turtle = Resources.loadImageByName("pi");
 		} else {
+			speed = 3;
 			numberOfTurtles = 2;
 			turtle = Resources.loadImageByName("e");
 		}
@@ -87,7 +89,7 @@ public class Turtle implements IEntity {
 
 	@Override
 	public int getSpeed() {
-		return SPEED;
+		return speed;
 	}
 
 }

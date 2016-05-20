@@ -8,7 +8,7 @@ public class Log implements IEntity {
 
     int x;
     int y;
-    final static int SPEED = 5;
+    int speed;
     private BufferedImage logIcon;
 
     /**
@@ -22,6 +22,7 @@ public class Log implements IEntity {
     public Log(int xpos, int ypos, int logLength) {
         x = xpos;
         y = ypos;
+        speed = -logLength * 7 / 5;
         logIcon = Resources.loadImageByName("Log" + logLength);
     }
 
@@ -62,7 +63,7 @@ public class Log implements IEntity {
 
 	@Override
 	public int getSpeed() {
-		return SPEED;
+		return speed;
 	}
     
 }
