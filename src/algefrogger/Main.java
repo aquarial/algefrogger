@@ -21,17 +21,6 @@ public class Main {
 		frame.setSize(frame.getPreferredSize());
 		panel.startgame();
 
-		/*
-		 * HEY PARTNER
-		 * THIS IS REALLY HARD TO MISS
-		 * BECAUSE IT'S ALSO IN THE README
-		 * I DIGRESS
-		 * IF YOU WANT, YOU CAN:
-		 * CLEAN UP SOME GAMEMODEL/LEVELSTATE CODE
-		 * ADD THE CARS
-		 * WORK DISPLAYING THE EQUATION AND THE ANSWERS AT TOP (I'll be working on this, but you can finish parts I haven't if I haven't pushed recently)
-		 * HAVE FUN
-		 */
 		panel.requestFocusInWindow();
 	}
 }
