@@ -76,11 +76,12 @@ public class GameModel {
 		lastPushedButton = direction;
 		recentPush = true;
 	}
-	
+
 	public int checkBelowSpeed() {
 		Player p = state.getPlayer();
-		for (IEntity IE : state.getEntities()){
-			if (IE == p) continue;
+		for (IEntity IE : state.getEntities()) {
+			if (IE == p)
+				continue;
 			if (IE.getX() < p.getX() + 20 && p.getX() + 20 < IE.getX() + IE.getWidth() && p.getY() == IE.getY())
 				return IE.getSpeed();
 		}
@@ -92,42 +93,50 @@ public class GameModel {
 	 */
 	public void update() {
 		Player player = state.getPlayer();
-		
-		if (recentPush){
-			switch (lastPushedButton){
-			case 'u': movePlayerUp(); break;
-			case 'd': movePlayerDown(); break;
-			case 'l': movePlayerLeft(); break;
-			case 'r': movePlayerRight(); break;
+
+		if (recentPush) {
+			switch (lastPushedButton) {
+			case 'u':
+				movePlayerUp();
+				break;
+			case 'd':
+				movePlayerDown();
+				break;
+			case 'l':
+				movePlayerLeft();
+				break;
+			case 'r':
+				movePlayerRight();
+				break;
 			}
 			recentPush = false;
 			player.setSpeed(checkBelowSpeed());
 		}
-		
-		
-		//Safeguard player position checks (need to test once player is working)
+
+		// Safeguard player position checks (need to test once player is
+		// working)
 		if (state.playerXPos() < 0)
 			player.setX(0);
 		else if (state.playerXPos() > 480)
 			player.setX(480);
 		else if (state.playerYPos() > 440)
 			player.setY(440);
-		
-		//Player jumping into answer spots
-		else if (state.playerYPos() < 40){
+
+		// Player jumping into answer spots
+		else if (state.playerYPos() < 40) {
 			if (0 < state.playerXPos() + 20 && state.playerXPos() + 20 < 45)
 				player.setX(0);
 			else if (160 < state.playerXPos() + 20 && state.playerXPos() + 20 < 210)
 				player.setX(160);
 			else if (320 < state.playerXPos() + 20 && state.playerXPos() + 20 < 350)
 				player.setX(320);
-			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525 )
+			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525)
 				player.setX(480);
 			else
 				player.setY(40);
 		}
-		
-		for (IEntity IE : state.getEntities()){
+
+		for (IEntity IE : state.getEntities()) {
 			IE.setX(IE.getX() + IE.getSpeed());
 			if (IE.getSpeed() > 0 && IE.getX() - IE.getWidth() >= 520)
 				IE.setX(-IE.getWidth());
