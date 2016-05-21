@@ -1,6 +1,6 @@
 # AlgeFrogger
 
-AlgeFrogger is a collaborative final with Wuble for Ap Computer Programming.
+AlgeFrogger is a collaborative final with Wuble for AP Computer Programming.
 
 The project is in progress.
 
