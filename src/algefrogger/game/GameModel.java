@@ -123,6 +123,7 @@ public class GameModel {
 				player.setY(40);
 		}
 
+		// movement & reseting if out of bounds
 		for (IEntity IE : state.getEntities()) {
 			IE.setX(IE.getX() + IE.getSpeed());
 			if (IE.getSpeed() > 0 && IE.getX() - IE.getWidth() >= 520)
