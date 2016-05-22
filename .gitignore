@@ -6,3 +6,4 @@ bin
 *.class
 *.db
 
+!AlgeFrogger.jar
