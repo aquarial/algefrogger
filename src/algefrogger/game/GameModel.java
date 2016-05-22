@@ -15,6 +15,8 @@ public class GameModel {
 	char lastPushedButton = 'u';
 	/** If input should be handled this tick */
 	boolean recentPush = false;
+	/** If the player will be reset this tick */
+	boolean playerWillBeResetToStart = true;
 
 	/**
 	 * Resets LevelState
@@ -86,6 +88,11 @@ public class GameModel {
 			if (IE.getX() < p.getX() + 20 && p.getX() + 20 < IE.getX() + IE.getWidth() && p.getY() == IE.getY())
 				return IE.getSpeed();
 		}
+
+		// if nothing below && player is in water, reset position
+		if (40 <= p.getY() && p.getY() <= 5 * 40) {
+			playerWillBeResetToStart = true;
+		}
 		return 0;
 	}
 
@@ -94,6 +101,8 @@ public class GameModel {
 	 */
 	public void update() {
 		Player player = state.getPlayer();
+
+		System.out.println(player.getSpeed());
 
 		if (recentPush) {
 			switch (lastPushedButton) {
@@ -111,8 +120,8 @@ public class GameModel {
 				break;
 			}
 			recentPush = false;
-			player.setSpeed(checkBelowSpeed());
 		}
+		player.setSpeed(checkBelowSpeed());
 
 		// keeps player inbounds
 		if (state.playerXPos() < 0)
@@ -143,6 +152,12 @@ public class GameModel {
 				IE.setX(-IE.getWidth());
 			else if (IE.getSpeed() < 0 && IE.getX() + IE.getWidth() <= 0)
 				IE.setX(520 + IE.getWidth());
+		}
+
+		if (playerWillBeResetToStart) {
+			player.setX(240);
+			player.setY(480);
+			playerWillBeResetToStart = false;
 		}
 	}
 }
