@@ -115,25 +115,34 @@ public class GameModel {
 
 		// Safeguard player position checks (need to test once player is
 		// working)
-		if (state.playerXPos() < 0)
+		if (state.playerXPos() < 0){
 			player.setX(0);
-		else if (state.playerXPos() > 480)
+			checkBelowSpeed();
+		}
+		else if (state.playerXPos() > 480){
 			player.setX(480);
-		else if (state.playerYPos() > 440)
+			checkBelowSpeed();
+		}
+		else if (state.playerYPos() > 440){
 			player.setY(440);
-
+		}
+		
 		// Player jumping into answer spots
 		else if (state.playerYPos() < 40) {
 			if (0 < state.playerXPos() + 20 && state.playerXPos() + 20 < 45)
 				player.setX(0);
 			else if (160 < state.playerXPos() + 20 && state.playerXPos() + 20 < 210)
 				player.setX(160);
-			else if (320 < state.playerXPos() + 20 && state.playerXPos() + 20 < 350)
+			else if (320 < state.playerXPos() + 20 && state.playerXPos() + 20 < 350){
 				player.setX(320);
+			}
 			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525)
 				player.setX(480);
-			else
+			else{
 				player.setY(40);
+				player.setSpeed(checkBelowSpeed());
+			}	
+				
 		}
 
 		for (IEntity IE : state.getEntities()) {

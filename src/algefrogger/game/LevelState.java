@@ -64,8 +64,8 @@ public class LevelState {
         for (int i = 0; i < 2; i++)
         	addIEntity(new Log(200 * i, 40, 4));
         // 5-logs
-        for (int i = 0; i < 3; i++)
-        	addIEntity(new Log(240*i + 80, 120, 5));
+        for (int i = 0; i < 2; i++)
+        	addIEntity(new Log(280*i + 80, 120, 5));
     }
 
     /**
