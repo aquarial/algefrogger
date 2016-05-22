@@ -122,7 +122,7 @@ public class GamePanel extends JPanel {
 				int index = Arrays.binarySearch(validCharKeyCodes, keyCode);
 
 				if (index >= 0 && keyIsNotPushed[index]) {
-					model.addKeyInput(characters[index]);
+					model.handleDirectionalInput(characters[index]);
 					keyIsNotPushed[index] = false;
 				}
 			}

@@ -60,7 +60,15 @@ public class GameModel {
 		state.movePlayerBy(0, 40);
 	}
 
-	public void addKeyInput(char direction) {
+	/**
+	 * Lets the model know the player has pushed a direction
+	 * <p>
+	 * The input will be handled next tick.
+	 * 
+	 * @param direction
+	 *            A character in {'u', 'l', 'r', 'd'}
+	 */
+	public void handleDirectionalInput(char direction) {
 		lastPushedButton = direction;
 		recentPush = true;
 	}
