@@ -102,8 +102,6 @@ public class GameModel {
 	public void update() {
 		Player player = state.getPlayer();
 
-		System.out.println(player.getSpeed());
-
 		if (recentPush) {
 			switch (lastPushedButton) {
 			case 'u':
