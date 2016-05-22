@@ -10,7 +10,28 @@ import algefrogger.game.entity.Player;
 import algefrogger.game.entity.Turtle;
 
 /**
- * Holds position data of a level
+ * Holds position data of a level<br>
+ * LevelState uses (x,y) coordinates to place objects.
+ * <p>
+ * (0,0) is the pixel in the upper-left corner.<br>
+ * (520,480) is the pixel in the lower-right corner.<br>
+ * <p>
+ * 
+ * <pre>
+ *  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ * |3 | | | 8 | | | 4 | | | 2|
+ * |= = = =   = = = =   = =  |
+ * | e e   e e   e e   e e   | - 2 long e-turtle
+ * |=   = = = = =   = = = =  | - 5 long log (ln148)
+ * |  = = =   = = =   = = =  | - 3 long log (ln20)
+ * |p p   p p p   p p p   p p| - 3 long pi-turtles
+ * |                         | - plain row
+ * |------------7------3-----| - car lane
+ * |---2---4--------6--------| - car lane
+ * |---------5---------1-----| - car lane
+ * |----3-----4-----8--------| - car lane
+ * |_ _ _ _ _ _ X _ _ _ _ _ _| - starting row
+ * </pre>
  */
 public class LevelState {
 
@@ -19,28 +40,12 @@ public class LevelState {
     private List<Turtle> turtles;
     private List<Car> cars;
     private Player player;
-    //@formatter:off
-    /* 
-     * LevelState uses (x,y) coordinates to place objects.
-     * (0,0)     is the pixel in the upper-left corner.
-     * (520,480) is the pixel in the lower-right corner.
-     * 
-     *  _ _ _ _ _ _ _ _ _ _ _ _ _ 
-     * |3 | | | 8 | | | 4 | | | 2|
-     * |= = = =   = = = =   = =  |
-     * | e e   e e   e e   e e   | - 2 long e-turtle
-     * |=   = = = = =   = = = =  | - 5 long log (ln148)
-     * |  = = =   = = =   = = =  | - 3 long log (ln20)     
-     * |p p   p p p   p p p   p p| - 3 long pi-turtles
-     * |                         | - plain row
-     * |------------7------3-----| - car lane
-     * |---2---4--------6--------| - car lane
-     * |---------5---------1-----| - car lane
-     * |----3-----4-----8--------| - car lane
-     * |_ _ _ _ _ _ X _ _ _ _ _ _| - starting row
-     */
-    //@formatter:on
 
+    /**
+     * Constructs default state
+     * <p>
+     * Entities are already placed inside the level
+     */
     public LevelState() {
         entities = new ArrayList<>();
         logs = new ArrayList<>();
@@ -66,6 +71,19 @@ public class LevelState {
         // 5-logs
         for (int i = 0; i < 2; i++)
         	addIEntity(new Log(280*i + 80, 120, 5));
+        // Cars Top
+        for (int i = 0; i < 2; i++)
+        	addIEntity(new Car(240*i, 280, 6));
+        // Cars Mid-Top
+        for (int i = 0; i < 3; i++)
+        	addIEntity(new Car(180*i, 320, 8));
+        // Cars Mid-Bottom
+        for (int i = 0; i < 4; i++)
+        	addIEntity(new Car(160*i, 360, 4));
+        // Cars Bottom
+        for (int i = 0; i < 2; i++)
+        	addIEntity(new Car(300*i, 400, 12));
+        	
     }
 
     /**
@@ -73,7 +91,7 @@ public class LevelState {
      * 
      * @param arg
      */
-    void addIEntity(IEntity arg) {
+    private void addIEntity(IEntity arg) {
         entities.add(arg);
 
         if (arg instanceof Log)
@@ -95,7 +113,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the logs that make up this level
      * @return
      */
     List<Log> getLogs() {
@@ -103,7 +121,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the turtles that make up this level
      * @return
      */
     List<Turtle> getTurtles() {
@@ -111,7 +129,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the cars that make up this level
      * @return
      */
     List<Car> getCars() {
@@ -142,6 +160,11 @@ public class LevelState {
     	return player;
     }
     
+    /**
+     * Moves player entity by args
+     * @param x pixels
+     * @param y pixels
+     */
     public void movePlayerBy(int x, int y){
     	player.setX(player.getX() + x);
     	player.setY(player.getY() + y);

@@ -15,8 +15,7 @@ public class Resources {
 	 * @return Buffered image of a similar name
 	 */
 	public static BufferedImage loadImageByName(String name) {
-		InputStream inputstream = Thread.currentThread().getClass()
-				.getResourceAsStream("/pics/" + name + ".png");
+		InputStream inputstream = Thread.currentThread().getClass().getResourceAsStream("/pics/" + name + ".png");
 		try {
 
 			BufferedImage image = ImageIO.read(inputstream);
@@ -38,16 +37,12 @@ public class Resources {
 	 * @param new_height
 	 * @return Scaled image
 	 */
-	public static BufferedImage scaleImage(BufferedImage imageToScale,
-			int new_height) {
-		float ratio = imageToScale.getWidth()
-				/ (float) imageToScale.getHeight();
+	public static BufferedImage scaleImage(BufferedImage imageToScale, int new_height) {
+		float ratio = imageToScale.getWidth() / (float) imageToScale.getHeight();
 		int new_width = (int) (ratio * new_height);
 
-		BufferedImage newImage = new BufferedImage(new_width, new_height,
-				imageToScale.getType());
-		newImage.createGraphics().drawImage(imageToScale, 0, 0, new_width,
-				new_height, null);
+		BufferedImage newImage = new BufferedImage(new_width, new_height, imageToScale.getType());
+		newImage.createGraphics().drawImage(imageToScale, 0, 0, new_width, new_height, null);
 		return newImage;
 	}
 }

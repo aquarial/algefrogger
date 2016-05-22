@@ -20,8 +20,10 @@ public class GamePanel extends JPanel {
 	private int height;
 	private GameModel model;
 
-	BufferedImage screen;
-	Graphics2D g2;
+	/** A screen buffer to reduce draws to JPanel */
+	BufferedImage bufferImage;
+	/** Graphics for the screen buffer */
+	Graphics2D bufferGraphics;
 
 	/**
 	 * Sets up GamePanel
@@ -35,8 +37,8 @@ public class GamePanel extends JPanel {
 		width = nwidth;
 		height = nheight;
 		model = new GameModel();
-		screen = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		g2 = screen.createGraphics();
+		bufferImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		bufferGraphics = bufferImage.createGraphics();
 
 	}
 
@@ -44,61 +46,72 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		// Erase background
-		g2.setColor(Color.GREEN);
-		g2.fillRect(0, 0, width, height);
+		bufferGraphics.setColor(Color.GREEN);
+		bufferGraphics.fillRect(0, 0, width, height);
 
 		// water
-		g2.setColor(Color.BLUE);
-		g2.fillRect(0, 40, width, 40 * 5);
+		bufferGraphics.setColor(Color.BLUE);
+		bufferGraphics.fillRect(0, 40, width, 40 * 5);
 
 		// road
-		g2.setColor(Color.BLACK);
-		g2.fillRect(0, 7 * 40, width, 40 * 4);
+		bufferGraphics.setColor(Color.BLACK);
+		bufferGraphics.fillRect(0, 7 * 40, width, 40 * 4);
 
 		// Lily Pads
 		for (int i = 0; i < 4; i++) {
-			g2.setColor(Color.BLUE);
-			g2.fillRect(160 * i, 2, 40, 38);
-			g2.setColor(Color.GREEN);
-			g2.fillRect(160 * i + 10, 12, 20, 20);
+			bufferGraphics.setColor(Color.BLUE);
+			bufferGraphics.fillRect(160 * i, 2, 40, 38);
+			bufferGraphics.setColor(Color.GREEN);
+			bufferGraphics.fillRect(160 * i + 10, 12, 20, 20);
 		}
 
 		// Draw all the entities
 		for (IEntity i : model.getAllIEntities()) {
-			g2.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
+			bufferGraphics.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
 		}
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
-		g2.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
-		
-		g.drawImage(screen, 0, 0, null);
+		bufferGraphics.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
+
+		g.drawImage(bufferImage, 0, 0, null);
 	}
 
+	/**
+	 * Starts a background thread to update & render the game
+	 */
 	public void startgame() {
 		model = new GameModel();
 		new Thread() {
 			@Override
 			public void run() {
 				while (true) {
-					GamePanel.this.sleep(60);
-					GamePanel.this.repaint();
+
 					model.update();
+					GamePanel.this.repaint();
+					try {
+						Thread.sleep(60);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
 				}
 			}
 		}.start();
+
 	}
 
-	private void sleep(int milliseconds) {
-		try {
-			Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * Creates a KeyListener that notifies the model when arrow keys are pushed
+	 * 
+	 * @return Specified KeyAdapter
+	 */
 	KeyAdapter createKeyListener() {
 		return new KeyAdapter() {
 
+			/**
+			 * Update keys known to be currently held down when a key is
+			 * released
+			 */
 			@Override
 			public void keyReleased(KeyEvent e) {
 				int keyCode = e.getExtendedKeyCode();
@@ -117,12 +130,17 @@ public class GamePanel extends JPanel {
 			char[] characters = new char[] { 'l', 'u', 'r', 'd' };
 			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true };
 
+			/**
+			 * Only notifies the model if the key was not already held down
+			 * 
+			 * @param e
+			 */
 			void handlePushedKey(KeyEvent e) {
 				int keyCode = e.getExtendedKeyCode();
 				int index = Arrays.binarySearch(validCharKeyCodes, keyCode);
 
 				if (index >= 0 && keyIsNotPushed[index]) {
-					model.addKeyInput(characters[index]);
+					model.handleDirectionalInput(characters[index]);
 					keyIsNotPushed[index] = false;
 				}
 			}

@@ -15,10 +15,10 @@ public class Car implements IEntity {
     public Car(int xpos, int ypos, int value) {
         x = xpos;
         y = ypos;
-        if ((x/40)%2 == 1)
-        	speed = -5;
+        if ((y/40)%2 == 1)
+        	speed = -1 * value;
         else
-        	speed = 5;
+        	speed = value;
         
         carIcon = new BufferedImage(40, 40, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = carIcon.createGraphics();

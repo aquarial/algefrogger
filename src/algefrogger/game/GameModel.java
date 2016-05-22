@@ -9,12 +9,14 @@ import algefrogger.game.entity.Player;
  * Holds and runs a frogger game
  */
 public class GameModel {
+	/** Internal level data */
 	private LevelState state;
-	/**
-	 * u = up, d = down, l = left, r = right
-	 */
+	/** u = up, d = down, l = left, r = right */
 	char lastPushedButton = 'u';
+	/** If input should be handled this tick */
 	boolean recentPush = false;
+	/** If the player will be reset this tick */
+	boolean playerWillBeResetToStart = true;
 
 	/**
 	 * Resets LevelState
@@ -36,9 +38,6 @@ public class GameModel {
 	 * Moves player one unit to the left
 	 */
 	public void movePlayerLeft() {
-		if (state.playerXPos() < 40) {
-			return;
-		}
 		state.movePlayerBy(-40, 0);
 	}
 
@@ -46,9 +45,6 @@ public class GameModel {
 	 * Moves player one unit to the right
 	 */
 	public void movePlayerRight() {
-		if (state.playerXPos() >= 480) {
-			return;
-		}
 		state.movePlayerBy(40, 0);
 	}
 
@@ -56,9 +52,6 @@ public class GameModel {
 	 * moves player 1 unit up
 	 */
 	public void movePlayerUp() {
-		if (state.playerYPos() < 40) {
-			return;
-		}
 		state.movePlayerBy(0, -40);
 	}
 
@@ -66,17 +59,27 @@ public class GameModel {
 	 * Moves player one unit down
 	 */
 	public void movePlayerDown() {
-		if (state.playerYPos() >= 440) {
-			return;
-		}
 		state.movePlayerBy(0, 40);
 	}
 
-	public void addKeyInput(char direction) {
+	/**
+	 * Lets the model know the player has pushed a direction
+	 * <p>
+	 * The input will be handled next tick.
+	 * 
+	 * @param direction
+	 *            A character in {'u', 'l', 'r', 'd'}
+	 */
+	public void handleDirectionalInput(char direction) {
 		lastPushedButton = direction;
 		recentPush = true;
 	}
 
+	/**
+	 * Returns the speed of the entity below the player, if it exists.
+	 * 
+	 * @return speed or 0
+	 */
 	public int checkBelowSpeed() {
 		Player p = state.getPlayer();
 		for (IEntity IE : state.getEntities()) {
@@ -85,7 +88,21 @@ public class GameModel {
 			if (IE.getX() < p.getX() + 20 && p.getX() + 20 < IE.getX() + IE.getWidth() && p.getY() == IE.getY())
 				return IE.getSpeed();
 		}
+
+		// if nothing below && player is in water, reset position
+		if (40 <= p.getY() && p.getY() <= 5 * 40) {
+			playerWillBeResetToStart = true;
+		}
 		return 0;
+	}
+	
+	public boolean isTouchingCar(IEntity e1){
+		for (IEntity IE : state.getCars()){
+			if ((e1.getY() == IE.getY()) && (e1.getX() <= IE.getX() + IE.getWidth()) && (e1.getX() + e1.getWidth() >= IE.getX()))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/**
@@ -110,11 +127,10 @@ public class GameModel {
 				break;
 			}
 			recentPush = false;
-			player.setSpeed(checkBelowSpeed());
 		}
+		player.setSpeed(checkBelowSpeed());
 
-		// Safeguard player position checks (need to test once player is
-		// working)
+		// keeps player inbounds
 		if (state.playerXPos() < 0){
 			player.setX(0);
 			checkBelowSpeed();
@@ -145,12 +161,19 @@ public class GameModel {
 				
 		}
 
+		// movement & reseting if out of bounds
 		for (IEntity IE : state.getEntities()) {
 			IE.setX(IE.getX() + IE.getSpeed());
 			if (IE.getSpeed() > 0 && IE.getX() - IE.getWidth() >= 520)
 				IE.setX(-IE.getWidth());
 			else if (IE.getSpeed() < 0 && IE.getX() + IE.getWidth() <= 0)
 				IE.setX(520 + IE.getWidth());
+		}
+		
+		if (playerWillBeResetToStart || isTouchingCar(player)) {
+			player.setX(240);
+			player.setY(480);
+			playerWillBeResetToStart = false;
 		}
 	}
 }
