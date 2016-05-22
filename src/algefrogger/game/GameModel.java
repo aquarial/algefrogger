@@ -73,6 +73,11 @@ public class GameModel {
 		recentPush = true;
 	}
 
+	/**
+	 * Returns the speed of the entity below the player, if it exists.
+	 * 
+	 * @return speed or 0
+	 */
 	public int checkBelowSpeed() {
 		Player p = state.getPlayer();
 		for (IEntity IE : state.getEntities()) {
