@@ -9,11 +9,11 @@ import algefrogger.game.entity.Player;
  * Holds and runs a frogger game
  */
 public class GameModel {
+	/** Internal level data */
 	private LevelState state;
-	/**
-	 * u = up, d = down, l = left, r = right
-	 */
+	/** u = up, d = down, l = left, r = right */
 	char lastPushedButton = 'u';
+	/** If input should be handled this tick */
 	boolean recentPush = false;
 
 	/**
