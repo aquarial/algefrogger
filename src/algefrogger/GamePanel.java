@@ -70,7 +70,7 @@ public class GamePanel extends JPanel {
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
 		g2.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
-		
+
 		g.drawImage(screen, 0, 0, null);
 	}
 

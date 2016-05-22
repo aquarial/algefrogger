@@ -73,7 +73,7 @@ public class LevelState {
      * 
      * @param arg
      */
-    void addIEntity(IEntity arg) {
+    private void addIEntity(IEntity arg) {
         entities.add(arg);
 
         if (arg instanceof Log)
@@ -95,7 +95,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the logs that make up this level
      * @return
      */
     List<Log> getLogs() {
@@ -103,7 +103,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the turtles that make up this level
      * @return
      */
     List<Turtle> getTurtles() {
@@ -111,7 +111,7 @@ public class LevelState {
     }
     
     /**
-     * All the entities that make up this level
+     * All the cars that make up this level
      * @return
      */
     List<Car> getCars() {
