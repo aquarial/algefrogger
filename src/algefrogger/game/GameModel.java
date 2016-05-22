@@ -36,9 +36,6 @@ public class GameModel {
 	 * Moves player one unit to the left
 	 */
 	public void movePlayerLeft() {
-		if (state.playerXPos() < 40) {
-			return;
-		}
 		state.movePlayerBy(-40, 0);
 	}
 
@@ -46,9 +43,6 @@ public class GameModel {
 	 * Moves player one unit to the right
 	 */
 	public void movePlayerRight() {
-		if (state.playerXPos() >= 480) {
-			return;
-		}
 		state.movePlayerBy(40, 0);
 	}
 
@@ -56,9 +50,6 @@ public class GameModel {
 	 * moves player 1 unit up
 	 */
 	public void movePlayerUp() {
-		if (state.playerYPos() < 40) {
-			return;
-		}
 		state.movePlayerBy(0, -40);
 	}
 
@@ -66,9 +57,6 @@ public class GameModel {
 	 * Moves player one unit down
 	 */
 	public void movePlayerDown() {
-		if (state.playerYPos() >= 440) {
-			return;
-		}
 		state.movePlayerBy(0, 40);
 	}
 
@@ -113,8 +101,7 @@ public class GameModel {
 			player.setSpeed(checkBelowSpeed());
 		}
 
-		// Safeguard player position checks (need to test once player is
-		// working)
+		// keeps player inbounds
 		if (state.playerXPos() < 0)
 			player.setX(0);
 		else if (state.playerXPos() > 480)
