@@ -86,9 +86,14 @@ public class GamePanel extends JPanel {
 		bufferGraphics.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
 		
 		
+		if (model.isGameFinished()) {
+			bufferGraphics.setColor(Color.CYAN);
+			bufferGraphics.setFont(new Font("serif-bold", Font.BOLD, 600));
+			bufferGraphics.drawString("YOU WIN", 30, 200);
+		}
 		
 		g.drawImage(bufferImage, 0, 0, null);
-		
+
 	}
 
 	/**
@@ -99,7 +104,7 @@ public class GamePanel extends JPanel {
 		new Thread() {
 			@Override
 			public void run() {
-				while (true) {
+				while (!model.isGameFinished()) {
 
 					model.update();
 					GamePanel.this.repaint();
