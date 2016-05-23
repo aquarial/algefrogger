@@ -1,6 +1,7 @@
 package algefrogger;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyAdapter;
@@ -23,7 +24,8 @@ public class GamePanel extends JPanel {
 	BufferedImage bufferImage;
 	/** Graphics for the screen buffer */
 	Graphics2D bufferGraphics;
-
+	Font stringFont = new Font("stringFont", Font.BOLD, 20);
+	Font defaultFont = new Font("defaultFont", Font.PLAIN, 12);
 	/**
 	 * Sets up GamePanel
 	 * 
@@ -62,6 +64,9 @@ public class GamePanel extends JPanel {
 			bufferGraphics.fillRect(160 * i, 2, 40, 38);
 			bufferGraphics.setColor(Color.GREEN);
 			bufferGraphics.fillRect(160 * i + 10, 12, 20, 20);
+			
+			// Lily pad answers
+			bufferGraphics.setFont(defaultFont);
 			bufferGraphics.setColor(Color.BLACK);
 			bufferGraphics.drawString(model.getAnswers().get(i) + "", 160*i + 15, 25);
 		}
@@ -70,11 +75,18 @@ public class GamePanel extends JPanel {
 		for (IEntity i : model.getAllIEntities()) {
 			bufferGraphics.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
 		}
+		
+		// Draws equation (bottom left)
+		bufferGraphics.setColor(Color.BLACK);
+		bufferGraphics.setFont(stringFont);
+		bufferGraphics.drawString(model.getEquationGen().getEquation(), 20, 460);
+
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
 		bufferGraphics.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
-		bufferGraphics.setColor(Color.BLACK);
-		bufferGraphics.drawString(model.getEquationGen().getEquation(), 20, 460);
+		
+		
+		
 		g.drawImage(bufferImage, 0, 0, null);
 		
 	}
