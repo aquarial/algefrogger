@@ -88,8 +88,8 @@ public class GamePanel extends JPanel {
 		
 		if (model.isGameFinished()) {
 			bufferGraphics.setColor(Color.CYAN);
-			bufferGraphics.setFont(new Font("serif-bold", Font.BOLD, 600));
-			bufferGraphics.drawString("YOU WIN", 30, 200);
+			bufferGraphics.setFont(new Font("serif-bold", Font.BOLD, 100));
+			bufferGraphics.drawString("YOU WIN", 25, 200);
 		}
 		
 		g.drawImage(bufferImage, 0, 0, null);
