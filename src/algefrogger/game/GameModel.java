@@ -22,6 +22,8 @@ public class GameModel {
 	EquationGenerator equationGen;
 	/** Answers on the lily pads*/
 	List<Integer> answers;
+	/** If game is finished, is true*/
+	boolean isGameFinished = false;
 
 	/**
 	 * Resets LevelState
@@ -66,6 +68,14 @@ public class GameModel {
 		equationGen.generateNewEquation();
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
+	}
+	
+	/**
+	 * Gets if the game is considered finished
+	 * @return
+	 */
+	public boolean isGameFinished() {
+		return isGameFinished;
 	}
 
 	/**
@@ -180,6 +190,8 @@ public class GameModel {
 		else if (state.playerYPos() > 440){
 			player.setY(440);
 		}
+		else if (state.playerYPos() < 0)
+			player.setY(0);
 		
 		// Player jumping into answer spots
 		else if (state.playerYPos() < 40) {
@@ -187,21 +199,29 @@ public class GameModel {
 				player.setX(0);
 				if (!(getAnswers().get(0) == equationGen.getAnswer()))
 						playerWillBeResetToStart = true;
+				else
+					isGameFinished = true;
 			}
 			else if (160 < state.playerXPos() + 20 && state.playerXPos() + 20 < 210){
 				player.setX(160);
 				if (!(getAnswers().get(1) == equationGen.getAnswer()))
 					playerWillBeResetToStart = true;
+				else
+					isGameFinished = true;
 			}
 			else if (320 < state.playerXPos() + 20 && state.playerXPos() + 20 < 350){
 				player.setX(320);
 				if (!(getAnswers().get(2) == equationGen.getAnswer()))
 					playerWillBeResetToStart = true;
+				else
+					isGameFinished = true;
 			}
 			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525){
 				player.setX(480);
 				if (!(getAnswers().get(3) == equationGen.getAnswer()))
 					playerWillBeResetToStart = true;
+				else
+					isGameFinished = true;
 			}
 			else{
 				player.setY(40);
