@@ -1,6 +1,7 @@
 package algefrogger.game.entity;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -20,12 +21,14 @@ public class Car implements IEntity {
         else
         	speed = value;
         
+        String tmp = "" + value;
+                
         carIcon = new BufferedImage(40, 40, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = carIcon.createGraphics();
         g.setColor(Color.RED);
         g.fillRect(0, 0, carIcon.getWidth(), carIcon.getHeight());
-        g.setColor(Color.BLACK);
-        g.drawString("" + value, 0, 0);
+        g.setColor(Color.WHITE);
+        g.drawString("" + value, 15, 25);
     }
 
     public int getValue() {

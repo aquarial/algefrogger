@@ -19,7 +19,6 @@ public class GamePanel extends JPanel {
 	private int width;
 	private int height;
 	private GameModel model;
-
 	/** A screen buffer to reduce draws to JPanel */
 	BufferedImage bufferImage;
 	/** Graphics for the screen buffer */
@@ -63,6 +62,8 @@ public class GamePanel extends JPanel {
 			bufferGraphics.fillRect(160 * i, 2, 40, 38);
 			bufferGraphics.setColor(Color.GREEN);
 			bufferGraphics.fillRect(160 * i + 10, 12, 20, 20);
+			bufferGraphics.setColor(Color.BLACK);
+			bufferGraphics.drawString(model.getAnswers().get(i) + "", 160*i + 15, 25);
 		}
 
 		// Draw all the entities
@@ -72,8 +73,10 @@ public class GamePanel extends JPanel {
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
 		bufferGraphics.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
-
+		bufferGraphics.setColor(Color.BLACK);
+		bufferGraphics.drawString(model.getEquationGen().getEquation(), 20, 460);
 		g.drawImage(bufferImage, 0, 0, null);
+		
 	}
 
 	/**

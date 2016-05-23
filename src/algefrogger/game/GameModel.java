@@ -1,6 +1,8 @@
 package algefrogger.game;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import algefrogger.game.entity.IEntity;
 import algefrogger.game.entity.Player;
@@ -17,12 +19,21 @@ public class GameModel {
 	boolean recentPush = false;
 	/** If the player will be reset this tick */
 	boolean playerWillBeResetToStart = true;
+	/** Generates equation and answers*/
+	EquationGenerator equationGen;
+	/** Answers on the lily pads*/
+	List<Integer> answers;
 
 	/**
 	 * Resets LevelState
 	 */
 	public GameModel() {
 		state = new LevelState();
+		
+		equationGen = new EquationGenerator();
+		answers = equationGen.getFakeAnswers(3);
+		answers.add(new Random().nextInt(4), equationGen.getAnswer());
+		
 	}
 
 	/**
@@ -32,6 +43,30 @@ public class GameModel {
 	 */
 	public List<IEntity> getAllIEntities() {
 		return state.getEntities();
+	}
+	/**
+	 * 
+	 * @return EquationGenerator object used
+	 */
+	public EquationGenerator getEquationGen() {
+		return equationGen;
+	}
+	
+	/**
+	 * Gets a list of the answers for the lily pads
+	 * @return
+	 */
+	public List<Integer> getAnswers(){
+		return answers;
+	}
+	
+	/**
+	 * Generates new numbers for the lily padsS
+	 */
+	public void generateNewLilyNumbers() {
+		equationGen.generateNewEquation();
+		answers = equationGen.getFakeAnswers(3);
+		answers.add(new Random().nextInt(4), equationGen.getAnswer());
 	}
 
 	/**
@@ -61,7 +96,7 @@ public class GameModel {
 	public void movePlayerDown() {
 		state.movePlayerBy(0, 40);
 	}
-
+	
 	/**
 	 * Lets the model know the player has pushed a direction
 	 * <p>
@@ -95,7 +130,11 @@ public class GameModel {
 		}
 		return 0;
 	}
-	
+	/**
+	 * Will check if entity provided is touching a car (used with player)
+	 * @param e1 entity to check
+	 * @return true = touching, false = not touching
+	 */
 	public boolean isTouchingCar(IEntity e1){
 		for (IEntity IE : state.getCars()){
 			if ((e1.getY() == IE.getY()) && (e1.getX() <= IE.getX() + IE.getWidth()) && (e1.getX() + e1.getWidth() >= IE.getX()))
@@ -145,15 +184,26 @@ public class GameModel {
 		
 		// Player jumping into answer spots
 		else if (state.playerYPos() < 40) {
-			if (0 < state.playerXPos() + 20 && state.playerXPos() + 20 < 45)
+			if (0 < state.playerXPos() + 20 && state.playerXPos() + 20 < 45){
 				player.setX(0);
-			else if (160 < state.playerXPos() + 20 && state.playerXPos() + 20 < 210)
+				if (!(getAnswers().get(0) == equationGen.getAnswer()))
+						playerWillBeResetToStart = true;
+			}
+			else if (160 < state.playerXPos() + 20 && state.playerXPos() + 20 < 210){
 				player.setX(160);
+				if (!(getAnswers().get(1) == equationGen.getAnswer()))
+					playerWillBeResetToStart = true;
+			}
 			else if (320 < state.playerXPos() + 20 && state.playerXPos() + 20 < 350){
 				player.setX(320);
+				if (!(getAnswers().get(2) == equationGen.getAnswer()))
+					playerWillBeResetToStart = true;
 			}
-			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525)
+			else if (480 < state.playerXPos() + 20 && state.playerXPos() + 20 < 525){
 				player.setX(480);
+				if (!(getAnswers().get(3) == equationGen.getAnswer()))
+					playerWillBeResetToStart = true;
+			}
 			else{
 				player.setY(40);
 				player.setSpeed(checkBelowSpeed());
@@ -173,6 +223,7 @@ public class GameModel {
 		if (playerWillBeResetToStart || isTouchingCar(player)) {
 			player.setX(240);
 			player.setY(480);
+			generateNewLilyNumbers();
 			playerWillBeResetToStart = false;
 		}
 	}
