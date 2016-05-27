@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import algefrogger.game.GameModel;
@@ -20,6 +21,8 @@ public class GamePanel extends JPanel {
 	private int width;
 	private int height;
 	private GameModel model;
+	/** A reference to the master jframe */
+	private JFrame jframe;
 	/** A screen buffer to reduce draws to JPanel */
 	BufferedImage bufferImage;
 	/** Graphics for the screen buffer */
@@ -32,11 +35,12 @@ public class GamePanel extends JPanel {
 	 * @param nwidth
 	 * @param nheight
 	 */
-	GamePanel(int nwidth, int nheight) {
+	GamePanel(int nwidth, int nheight, JFrame frame_reference) {
 		super();
 		addKeyListener(createKeyListener());
 		width = nwidth;
 		height = nheight;
+		jframe = frame_reference;
 		model = new GameModel();
 		bufferImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		bufferGraphics = bufferImage.createGraphics();
@@ -105,6 +109,9 @@ public class GamePanel extends JPanel {
 			@Override
 			public void run() {
 				while (!model.isGameFinished()) {
+
+					String score = String.format("%03d", 1);
+					jframe.setTitle("Score = " + score);
 
 					model.update();
 					GamePanel.this.repaint();
