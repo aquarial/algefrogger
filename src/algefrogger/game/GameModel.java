@@ -36,7 +36,7 @@ public class GameModel {
 		equationGen = new EquationGenerator();
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
-		score = 2;
+		score = 102;
 	}
 
 	/**
@@ -233,10 +233,6 @@ public class GameModel {
 				
 		}
 		
-		if (isGameFinished) {
-			score += equationGen.getAnswer();
-		}
-
 		// movement & reseting if out of bounds
 		for (IEntity IE : state.getEntities()) {
 			IE.setX(IE.getX() + IE.getSpeed());
