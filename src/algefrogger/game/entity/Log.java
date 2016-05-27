@@ -22,7 +22,7 @@ public class Log implements IEntity {
     public Log(int xpos, int ypos, int logLength) {
         x = xpos;
         y = ypos;
-        speed = -logLength * 7 / 5;
+        speed = -logLength * 4 / 5;
         logIcon = Resources.loadImageByName("Log" + logLength);
     }
 

@@ -73,16 +73,16 @@ public class LevelState {
         	addIEntity(new Log(280*i + 80, 120, 5));
         // Cars Top
         for (int i = 0; i < 2; i++)
-        	addIEntity(new Car(240*i, 280, 6));
+        	addIEntity(new Car(240*i, 280, 3));
         // Cars Mid-Top
         for (int i = 0; i < 3; i++)
-        	addIEntity(new Car(180*i, 320, 8));
+        	addIEntity(new Car(180*i, 320, 4));
         // Cars Mid-Bottom
         for (int i = 0; i < 4; i++)
-        	addIEntity(new Car(160*i, 360, 4));
+        	addIEntity(new Car(160*i, 360, 1));
         // Cars Bottom
         for (int i = 0; i < 2; i++)
-        	addIEntity(new Car(300*i, 400, 12));
+        	addIEntity(new Car(300*i, 400, 5));
         	
     }
 
