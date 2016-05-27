@@ -36,7 +36,7 @@ public class GameModel {
 		equationGen = new EquationGenerator();
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
-		score = 0;
+		score = 2;
 	}
 
 	/**

@@ -110,7 +110,7 @@ public class GamePanel extends JPanel {
 			public void run() {
 				while (!model.isGameFinished()) {
 
-					String score = String.format("%03d", 1);
+					String score = String.format("%03d", model.getCurrentScore());
 					jframe.setTitle("Score = " + score);
 
 					model.update();
