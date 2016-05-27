@@ -22,6 +22,8 @@ public class GameModel {
 	EquationGenerator equationGen;
 	/** Answers on the lily pads*/
 	List<Integer> answers;
+	/** Current player score */
+	private int score;
 	/** If game is finished, is true*/
 	boolean isGameFinished = false;
 
@@ -34,7 +36,7 @@ public class GameModel {
 		equationGen = new EquationGenerator();
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
-		
+		score = 0;
 	}
 
 	/**
@@ -147,6 +149,7 @@ public class GameModel {
 	public boolean isTouchingCar(IEntity e1){
 		for (IEntity IE : state.getCars()){
 			if ((e1.getY() == IE.getY()) && (e1.getX() <= IE.getX() + IE.getWidth()) && (e1.getX() + e1.getWidth() >= IE.getX()))
+				// score -= IE.getPointValue();
 				return true;
 		}
 		
@@ -229,6 +232,10 @@ public class GameModel {
 			}	
 				
 		}
+		
+		if (isGameFinished) {
+			score += equationGen.getAnswer();
+		}
 
 		// movement & reseting if out of bounds
 		for (IEntity IE : state.getEntities()) {
@@ -240,10 +247,20 @@ public class GameModel {
 		}
 		
 		if (playerWillBeResetToStart || isTouchingCar(player)) {
+
+			if (playerWillBeResetToStart) {
+				score -= 2;
+			}
+
 			player.setX(240);
 			player.setY(480);
 			generateNewLilyNumbers();
 			playerWillBeResetToStart = false;
 		}
+	}
+	
+	
+	public int getCurrentScore() {
+		return score;
 	}
 }
