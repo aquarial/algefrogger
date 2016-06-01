@@ -3,6 +3,7 @@ package algefrogger.game;
 import java.util.List;
 import java.util.Random;
 
+import algefrogger.game.entity.Car;
 import algefrogger.game.entity.IEntity;
 import algefrogger.game.entity.Player;
 
@@ -71,6 +72,13 @@ public class GameModel {
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
 	}
+	/**
+	 * Gets the score of player
+	 * @return
+	 */
+	public int getScore() {
+		return score;
+	}
 	
 	/**
 	 * Gets if the game is considered finished
@@ -78,6 +86,13 @@ public class GameModel {
 	 */
 	public boolean isGameFinished() {
 		return isGameFinished;
+	}
+	/**
+	 * Sets if the game is done
+	 * @param b
+	 */
+	public void setIsGameFinished(boolean b){
+		isGameFinished = true;
 	}
 
 	/**
@@ -148,9 +163,11 @@ public class GameModel {
 	 */
 	public boolean isTouchingCar(IEntity e1){
 		for (IEntity IE : state.getCars()){
-			if ((e1.getY() == IE.getY()) && (e1.getX() <= IE.getX() + IE.getWidth()) && (e1.getX() + e1.getWidth() >= IE.getX()))
-				// score -= IE.getPointValue();
+			if ((e1.getY() == IE.getY()) && (e1.getX() <= IE.getX() + IE.getWidth()) && (e1.getX() + e1.getWidth() >= IE.getX())){
+				Car c = (Car)IE;
+				score -= c.getValue();
 				return true;
+			}
 		}
 		
 		return false;

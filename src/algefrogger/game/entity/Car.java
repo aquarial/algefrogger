@@ -8,7 +8,7 @@ public class Car implements IEntity {
 
     int x;
     int y;
-    int carvalue;
+    int carValue;
     int speed;
     BufferedImage carIcon;
 
@@ -19,7 +19,7 @@ public class Car implements IEntity {
         	speed = -1 * value;
         else
         	speed = value;
-        
+        carValue = value;
         carIcon = new BufferedImage(40, 40, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = carIcon.createGraphics();
         g.setColor(Color.RED);
@@ -29,7 +29,7 @@ public class Car implements IEntity {
     }
 
     public int getValue() {
-        return carvalue;
+        return carValue;
     }
 
     @Override
