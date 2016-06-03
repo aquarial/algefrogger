@@ -8,5 +8,6 @@ The object of the game is to move the pink X from the bottom of the screen to th
 
 Controls:
 Arrow keys to move
+'r' to reset
 
 The game pauses on completion.
