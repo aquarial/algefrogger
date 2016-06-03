@@ -18,7 +18,7 @@ public class GameModel {
 	/** If input should be handled this tick */
 	boolean recentPush = false;
 	/** If the player will be reset this tick */
-	boolean playerWillBeResetToStart = true;
+	boolean playerWillBeResetToStart = false;
 	/** Generates equation and answers*/
 	EquationGenerator equationGen;
 	/** Answers on the lily pads*/
@@ -37,7 +37,8 @@ public class GameModel {
 		equationGen = new EquationGenerator();
 		answers = equationGen.getFakeAnswers(3);
 		answers.add(new Random().nextInt(4), equationGen.getAnswer());
-		score = 102;
+		
+		score = 15;
 	}
 
 	/**
@@ -286,7 +287,7 @@ public class GameModel {
 			state.getPlayer().setX(240);
 			state.getPlayer().setY(480);
 			generateNewLilyNumbers();
-			setScore(100);
+			setScore(15);
 			setIsGameFinished(false);
 			recentPush = false;
 		}
