@@ -87,8 +87,8 @@ public class GamePanel extends JPanel {
 		// Draws equation (bottom left)
 		bufferGraphics.setColor(Color.BLACK);
 		bufferGraphics.setFont(stringFont);
-		bufferGraphics
-				.drawString(model.getEquationGen().getEquation(), 20, 460);
+		bufferGraphics.drawString(model.getEquationGen().getEquation(), 20,
+				460);
 
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
@@ -121,12 +121,13 @@ public class GamePanel extends JPanel {
 				while (true) {
 					while (!model.isGameFinished()) {
 
+						model.update();
+						GamePanel.this.repaint();
+
 						String score = String.format("%03d",
 								model.getCurrentScore());
 						jframe.setTitle("Score = " + score);
 
-						model.update();
-						GamePanel.this.repaint();
 						try {
 							Thread.sleep(60);
 						} catch (InterruptedException e) {
@@ -135,9 +136,10 @@ public class GamePanel extends JPanel {
 					}
 					try {
 						Thread.sleep(60);
-					} catch (InterruptedException e){
+					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
 					model.updateEndScreen();
 				}
 			}
@@ -170,10 +172,12 @@ public class GamePanel extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				handlePushedKey(e);
 			}
-			
-			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40, KeyEvent.VK_R };
+
+			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40,
+					KeyEvent.VK_R };
 			char[] characters = new char[] { 'l', 'u', 'r', 'd', 's' };
-			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true, true };
+			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true,
+					true };
 
 			/**
 			 * Only notifies the model if the key was not already held down
