@@ -81,18 +81,27 @@ public class GameModel {
 	}
 	
 	/**
+	 * Sets the score
+	 * @param s
+	 */
+	public void setScore(int s){
+		score = s;
+	}
+	
+	/**
 	 * Gets if the game is considered finished
 	 * @return
 	 */
 	public boolean isGameFinished() {
 		return isGameFinished;
 	}
+	
 	/**
 	 * Sets if the game is done
 	 * @param b
 	 */
 	public void setIsGameFinished(boolean b){
-		isGameFinished = true;
+		isGameFinished = b;
 	}
 
 	/**
@@ -272,6 +281,16 @@ public class GameModel {
 		}
 	}
 	
+	public void updateEndScreen() {
+		if (recentPush && lastPushedButton == 's'){
+			state.getPlayer().setX(240);
+			state.getPlayer().setY(480);
+			generateNewLilyNumbers();
+			setScore(100);
+			setIsGameFinished(false);
+			recentPush = false;
+		}
+	}
 	
 	public int getCurrentScore() {
 		return score;

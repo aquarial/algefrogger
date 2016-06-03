@@ -29,6 +29,7 @@ public class GamePanel extends JPanel {
 	Graphics2D bufferGraphics;
 	Font stringFont = new Font("stringFont", Font.BOLD, 20);
 	Font defaultFont = new Font("defaultFont", Font.PLAIN, 12);
+
 	/**
 	 * Sets up GamePanel
 	 * 
@@ -42,7 +43,8 @@ public class GamePanel extends JPanel {
 		height = nheight;
 		jframe = frame_reference;
 		model = new GameModel();
-		bufferImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		bufferImage = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_RGB);
 		bufferGraphics = bufferImage.createGraphics();
 
 	}
@@ -68,28 +70,30 @@ public class GamePanel extends JPanel {
 			bufferGraphics.fillRect(160 * i, 2, 40, 38);
 			bufferGraphics.setColor(Color.GREEN);
 			bufferGraphics.fillRect(160 * i + 10, 12, 20, 20);
-			
+
 			// Lily pad answers
 			bufferGraphics.setFont(defaultFont);
 			bufferGraphics.setColor(Color.BLACK);
-			bufferGraphics.drawString(model.getAnswers().get(i) + "", 160*i + 15, 25);
+			bufferGraphics.drawString(model.getAnswers().get(i) + "",
+					160 * i + 15, 25);
 		}
 
 		// Draw all the entities
 		for (IEntity i : model.getAllIEntities()) {
-			bufferGraphics.drawImage(i.getEntityImage(), i.getX(), i.getY(), null);
+			bufferGraphics.drawImage(i.getEntityImage(), i.getX(), i.getY(),
+					null);
 		}
-		
+
 		// Draws equation (bottom left)
 		bufferGraphics.setColor(Color.BLACK);
 		bufferGraphics.setFont(stringFont);
-		bufferGraphics.drawString(model.getEquationGen().getEquation(), 20, 460);
+		bufferGraphics
+				.drawString(model.getEquationGen().getEquation(), 20, 460);
 
 		// Draws player back on top
 		IEntity p = model.getAllIEntities().get(0);
 		bufferGraphics.drawImage(p.getEntityImage(), p.getX(), p.getY(), null);
-		
-		
+
 		if (model.isGameFinished()) {
 			bufferGraphics.setColor(Color.CYAN);
 			bufferGraphics.setFont(new Font("serif-bold", Font.BOLD, 100));
@@ -101,7 +105,7 @@ public class GamePanel extends JPanel {
 			bufferGraphics.drawString("YOU LOSE", 25, 200);
 			model.setIsGameFinished(true);
 		}
-		
+
 		g.drawImage(bufferImage, 0, 0, null);
 
 	}
@@ -114,19 +118,27 @@ public class GamePanel extends JPanel {
 		new Thread() {
 			@Override
 			public void run() {
-				while (!model.isGameFinished()) {
+				while (true) {
+					while (!model.isGameFinished()) {
 
-					String score = String.format("%03d", model.getCurrentScore());
-					jframe.setTitle("Score = " + score);
+						String score = String.format("%03d",
+								model.getCurrentScore());
+						jframe.setTitle("Score = " + score);
 
-					model.update();
-					GamePanel.this.repaint();
+						model.update();
+						GamePanel.this.repaint();
+						try {
+							Thread.sleep(60);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 					try {
 						Thread.sleep(60);
-					} catch (InterruptedException e) {
+					} catch (InterruptedException e){
 						e.printStackTrace();
 					}
-
+					model.updateEndScreen();
 				}
 			}
 		}.start();
@@ -158,10 +170,10 @@ public class GamePanel extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				handlePushedKey(e);
 			}
-
-			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40 };
-			char[] characters = new char[] { 'l', 'u', 'r', 'd' };
-			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true };
+			
+			int[] validCharKeyCodes = new int[] { 37, 38, 39, 40, KeyEvent.VK_R };
+			char[] characters = new char[] { 'l', 'u', 'r', 'd', 's' };
+			boolean[] keyIsNotPushed = new boolean[] { true, true, true, true, true };
 
 			/**
 			 * Only notifies the model if the key was not already held down
