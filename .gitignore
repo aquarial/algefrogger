@@ -1,3 +1,4 @@
+target/
 .project
 bin
 .settings
@@ -7,4 +8,3 @@ bin
 *.db
 *.iml
 .idea
-!AlgeFrogger*.jar
