@@ -15,7 +15,7 @@ public class Resources {
 	 * @return Buffered image of a similar name
 	 */
 	public static BufferedImage loadImageByName(String name) {
-		InputStream inputstream = Thread.currentThread().getClass().getResourceAsStream("/pics/" + name + ".png");
+		InputStream inputstream = Resources.class.getResourceAsStream("pics/" + name + ".png");
 		try {
 
 			BufferedImage image = ImageIO.read(inputstream);
